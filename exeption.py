@@ -1,0 +1,2 @@
+class TextIsDifferent(Exception):
+    pass
