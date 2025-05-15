@@ -1,8 +1,5 @@
-from playwright.sync_api import Page
-
-class PageTwo():
-
-    def __init__(self, page: Page):
+class PageTwo:
+    def __init__(self, page):
         self.page = page
 
     @property

@@ -1,14 +1,15 @@
-from playwright.sync_api import Page
+from utils import wait_page_stable
 
 
-class PageOne():
+class PageOne:
     link = "https://webglsamples.org/collectibles/index.html"
-    welcome_text = 'Welcome to Collectibles Painter'
-    select_text = 'Select a model to begin'
+    welcome_text = "Welcome to Collectibles Painter"
+    select_text = "Select a model to begin"
 
-    def __init__(self, page: Page):
+    def __init__(self, page):
         self.page = page
-        page.goto(self.link)
+        page.goto(self.link, timeout=0)
+        wait_page_stable(page)
 
     @property
     def element_loading_menu(self):
@@ -24,7 +25,7 @@ class PageOne():
 
     @property
     def element_loading_menu_welcome(self):
-        return self.page.locator('#loadingMenu h4')
+        return self.page.locator("#loadingMenu h4")
 
     @property
     def element_loading_menu_select(self):
