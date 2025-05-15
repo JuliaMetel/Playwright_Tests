@@ -1,5 +1,6 @@
+import time
 import pytest
-from playwright.sync_api import expect
+from playwright.sync_api import expect, Page
 from utils import wait_page_stable, is_elements_screenshots_equal
 from page_one import PageOne
 from page_two import PageTwo
@@ -45,8 +46,16 @@ class TestClass:
     @pytest.mark.parametrize(
         "sex", ["element_doll_base_male", "element_doll_base_female"]
     )
-    def test_turning_canvas(self, page, sex):
+    def test_turning_canvas(self, page: Page, sex):
         page_one = PageOne(page)
         expect(page_one.element_loading_menu).to_be_visible()
         getattr(page_one, sex).click()
         wait_page_stable(page)
+        page_two = PageTwo(page)
+        page_two.element_canvas.hover()
+        box = page_two.element_canvas.bounding_box()
+        page.mouse.down(button = "left")
+        page.mouse.move(box['x']+1,box['y']+1, steps = 15)
+        page.mouse.up(button = "left")
+        time.sleep(40)
+
