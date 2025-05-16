@@ -54,8 +54,7 @@ class TestClass:
         page_two = PageTwo(page)
         page_two.element_canvas.hover()
         box = page_two.element_canvas.bounding_box()
-        page.mouse.down(button = "left")
-        page.mouse.move(box['x']+1,box['y']+1, steps = 15)
-        page.mouse.up(button = "left")
-        time.sleep(40)
-
+        page.mouse.down(button="left")
+        page.mouse.move(box["x"] + 1, box["y"] + 1, steps=15)
+        page.mouse.up(button="left")
+        time.sleep(5)

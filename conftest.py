@@ -10,3 +10,10 @@ def page(request: pytest.FixtureRequest) -> Generator[Any, Any, Page]:
         Browser = playwright.chromium.launch(headless=False)
         page = Browser.new_page()
         yield page
+
+
+@pytest.fixture(autouse=True)
+def failed_test_screenshot(request: pytest.FixtureRequest, page):
+    yield
+    if request.node.rep_call.failed:
+        page.screenshot(path=f"{request.node.name}.png")
