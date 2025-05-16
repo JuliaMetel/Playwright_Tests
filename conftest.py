@@ -1,10 +1,12 @@
+from collections.abc import Generator
+from typing import Any
 import pytest
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, Page
 
 
 @pytest.fixture
-def page(request):
-    with sync_playwright() as Page:
-        Browser = Page.chromium.launch(headless=False)
+def page(request: pytest.FixtureRequest) -> Generator[Any, Any, Page]:
+    with sync_playwright() as playwright:
+        Browser = playwright.chromium.launch(headless=False)
         page = Browser.new_page()
         yield page
