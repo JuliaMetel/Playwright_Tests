@@ -54,6 +54,7 @@ class TestClass:
         page_two = PageTwo(page)
         page_two.element_canvas.hover()
         box = page_two.element_canvas.bounding_box()
+        assert box is not None, "Taking box from absent/not visible element"
         page.mouse.down(button="left")
         page.mouse.move(box["x"] + 1, box["y"] + 1, steps=15)
         page.mouse.up(button="left")
