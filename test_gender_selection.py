@@ -26,6 +26,7 @@ class TestClass:
     def test_loading_menu_header_select(self, page: Page) -> None:
         page_one = PageOne(page)
         expect(page_one.element_loading_menu_select).to_have_text(page_one.select_text)
+        assert False
 
     @pytest.mark.parametrize(
         "sex", ["element_doll_base_male", "element_doll_base_female"]

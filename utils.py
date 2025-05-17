@@ -29,7 +29,7 @@ def is_elements_screenshots_equal(link: str, element: Locator, name: str) -> boo
     image_1 = Image.open(io.BytesIO(element.screenshot()))
     if is_images_equal(image_1, Image.open(link)):
         return True
-    image_1.save(f"{name}.png")
+    # image_1.save(f"{name}.png")
     return False
 
 
