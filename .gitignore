@@ -2,4 +2,6 @@ venv/
 __pycache__/
 .DS_Store
 .idea/
+*.png
+screenshots/
 failed_screenshots/
