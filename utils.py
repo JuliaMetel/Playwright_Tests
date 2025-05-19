@@ -25,11 +25,10 @@ def wait_page_stable(page: Page) -> None:
         image_1 = image_2
 
 
-def is_elements_screenshots_equal(link: str, element: Locator, name: str) -> bool:
+def is_elements_screenshots_equal(img: ImageFile, element: Locator) -> bool:
     image_1 = Image.open(io.BytesIO(element.screenshot()))
-    if is_images_equal(image_1, Image.open(link)):
+    if is_images_equal(image_1, img):
         return True
-    # image_1.save(f"{name}.png")
     return False
 
 
