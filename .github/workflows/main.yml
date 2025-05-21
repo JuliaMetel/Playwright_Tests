@@ -49,11 +49,10 @@ jobs:
           poetry-version: "latest"
 
       - name: Install dependencies
-        run: poetry install --no-root; poetry run playwright install; apt-get update; apt-get install -y xvfb-run
+        run: poetry install --no-root; poetry run playwright install
 
       - name: Test's run
-        run: |
-          xvfb-run poetry run pytest --junit-xml=result.xml
+        run: poetry run pytest --junit-xml=result.xml
 
       - name: Test Report
         uses: dorny/test-reporter@v2
