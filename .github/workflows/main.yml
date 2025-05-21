@@ -28,11 +28,11 @@ jobs:
           set -x
           par=0
           poetry run mypy .
-          par=$par+$?
+          par=$(($par+$?))
           poetry run ruff format --check
-          par=$par+$?
+          par=$(($par+$?))
           poetry run ruff check
-          par=$par+$?
+          par=$(($par+$?))
           exit $par
 
   tests:
@@ -49,11 +49,11 @@ jobs:
           poetry-version: "latest"
 
       - name: Install dependencies
-        run: poetry install --no-root; poetry run playwright install
+        run: poetry install --no-root; poetry run playwright install; apt-get update; apt-get install -y xvfb-run
 
       - name: Test's run
         run: |
-          poetry run pytest --junit-xml=result.xml
+          xvfb-run poetry run pytest --junit-xml=result.xml
 
       - name: Test Report
         uses: dorny/test-reporter@v2
