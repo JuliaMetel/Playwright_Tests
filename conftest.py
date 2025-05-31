@@ -12,7 +12,7 @@ from PIL import Image
 @pytest.fixture
 def page() -> Generator[Page, None, None]:
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(headless=False)
         _page = browser.new_page()
         yield _page
 

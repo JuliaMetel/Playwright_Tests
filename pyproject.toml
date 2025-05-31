@@ -12,7 +12,8 @@ dependencies = [
     "pytest-playwright (>=0.7.0,<0.8.0)",
     "pillow (>=11.2.1,<12.0.0)",
     "ruff (>=0.11.9,<0.12.0)",
-    "mypy (>=1.15.0,<2.0.0)"
+    "mypy (>=1.15.0,<2.0.0)",
+    "types-requests (>=2.32.0.20250515,<3.0.0.0)"
 ]
 screenshots_dir = "screenshots"
 failed_screenshots_dir = "failed_screenshots"
