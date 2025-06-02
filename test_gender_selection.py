@@ -142,6 +142,7 @@ class TestClassAJAX:
         expect(page_three.spinner).not_to_be_visible(timeout=100000)
         expect(page_three.content).to_have_text("New text here")
 
+
 class TestClassQAPlayground:
     def test_button_in_iframe(self, page: Page) -> None:
         page_four = PageFour(page)
@@ -156,7 +157,3 @@ class TestClassQAPlayground:
         file_chooser = fc_info.value
         file_chooser.set_files("./pictures/test_pic.jpg")
         expect(page_five.text_under_button()).to_have_text("1 File Selected")
-
-
-
-

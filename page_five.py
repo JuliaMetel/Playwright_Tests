@@ -16,4 +16,3 @@ class PageFive:
 
     def text_under_button(self) -> Locator:
         return self.page.locator("css=#num-of-files")
-

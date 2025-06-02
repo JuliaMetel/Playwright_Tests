@@ -12,7 +12,15 @@ class PageFour:
 
     @property
     def button(self) -> Locator:
-        return self.page.frame_locator("css=#frame1").frame_locator("css=#frame2").locator("css=.btn")
+        return (
+            self.page.frame_locator("css=#frame1")
+            .frame_locator("css=#frame2")
+            .locator("css=.btn")
+        )
 
     def text_by_button(self) -> Locator:
-        return self.page.frame_locator("css=#frame1").frame_locator("css=#frame2").locator("css=#msg")
+        return (
+            self.page.frame_locator("css=#frame1")
+            .frame_locator("css=#frame2")
+            .locator("css=#msg")
+        )
