@@ -3,5 +3,7 @@ __pycache__/
 .DS_Store
 .idea/
 *.png
+*.jpeg
+*.jpg
 screenshots/
 failed_screenshots/

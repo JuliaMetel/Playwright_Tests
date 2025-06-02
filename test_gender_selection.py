@@ -7,6 +7,8 @@ from utils import wait_page_stable, is_elements_screenshots_equal
 from page_one import PageOne
 from page_two import PageTwo
 from page_three import PageThree
+from page_four import PageFour
+from page_five import PageFive
 
 
 class TestClass:
@@ -139,3 +141,22 @@ class TestClassAJAX:
         page_three.button_triggering_ajax_request.click()
         expect(page_three.spinner).not_to_be_visible(timeout=100000)
         expect(page_three.content).to_have_text("New text here")
+
+class TestClassQAPlayground:
+    def test_button_in_iframe(self, page: Page) -> None:
+        page_four = PageFour(page)
+        page_four.button.click()
+        expect(page_four.text_by_button()).to_have_text("Button Clicked")
+
+    def test_upload_file(self, page: Page) -> None:
+        page_five = PageFive(page)
+        expect(page_five.text_under_button()).to_have_text("No File Selected")
+        with page.expect_file_chooser() as fc_info:
+            page_five.button_select_image_file.click()
+        file_chooser = fc_info.value
+        file_chooser.set_files("./pictures/test_pic.jpg")
+        expect(page_five.text_under_button()).to_have_text("1 File Selected")
+
+
+
+
