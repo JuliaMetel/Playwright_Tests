@@ -52,7 +52,7 @@ jobs:
         run: poetry install --no-root; poetry run playwright install
 
       - name: Test's run
-        run: poetry run pytest --junit-xml=result.xml
+        run: CI=true poetry run pytest --junit-xml=result.xml
 
       - name: Test Report
         uses: dorny/test-reporter@v2

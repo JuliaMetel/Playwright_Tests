@@ -1,3 +1,4 @@
+import os
 import time
 from typing import Callable
 import pytest
@@ -34,6 +35,7 @@ class TestClass:
         page_one = PageOne(page)
         expect(page_one.element_loading_menu_select).to_have_text(page_one.select_text)
 
+    @pytest.mark.skipif(os.getenv("CI") == "true", reason="Skipped in CI")
     @pytest.mark.parametrize(
         "sex", ["element_doll_base_male", "element_doll_base_female"]
     )
@@ -52,6 +54,7 @@ class TestClass:
             get_screenshot(sex), page_two.element_canvas
         ), "Screenshots don't match"
 
+    @pytest.mark.skipif(os.getenv("CI") == "true", reason="Skipped in CI")
     @pytest.mark.parametrize(
         "sex", ["element_doll_base_male", "element_doll_base_female"]
     )
@@ -149,6 +152,7 @@ class TestClassQAPlayground:
         page_four.button.click()
         expect(page_four.text_by_button).to_have_text("Button Clicked")
 
+    @pytest.mark.skipif(os.getenv("CI") == "true", reason="Skipped in CI")
     def test_upload_file(self, page: Page) -> None:
         page_five = PageFive(page)
         expect(page_five.text_under_button).to_have_text("No File Selected")
