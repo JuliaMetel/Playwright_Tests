@@ -1,6 +1,7 @@
 import time
 from typing import Callable
 import pytest
+import requests
 from PIL.ImageFile import ImageFile
 from playwright.sync_api import expect, Page, Route, Request
 from utils import wait_page_stable, is_elements_screenshots_equal
@@ -9,6 +10,7 @@ from page_two import PageTwo
 from page_three import PageThree
 from page_four import PageFour
 from page_five import PageFive
+from page_six import PageSix
 
 
 class TestClass:
@@ -128,8 +130,6 @@ class TestClassAJAX:
 
         def handle(route: Route, request: Request):
             expect(page_three.spinner).to_be_visible()
-            import requests
-
             resp = requests.get(request.url)
             route.fulfill(
                 status=resp.status_code,
@@ -157,3 +157,16 @@ class TestClassQAPlayground:
         file_chooser = fc_info.value
         file_chooser.set_files("./pictures/test_pic.jpg")
         expect(page_five.text_under_button()).to_have_text("1 File Selected")
+
+    def test_alert(self, page: Page) -> None:
+        PageSix(page)
+        text_by_alert = ""
+
+        def handle_dialog(dialog):
+            dialog.accept()
+            nonlocal text_by_alert
+            text_by_alert = dialog.message
+
+        page.on("dialog", handle_dialog)
+        page.evaluate("alert('Test alert')")
+        assert text_by_alert == "Test alert", "Texts are different"
