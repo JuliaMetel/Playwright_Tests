@@ -14,5 +14,6 @@ class PageFive:
     def button_select_image_file(self) -> Locator:
         return self.page.locator("css=.btn-green-outline")
 
+    @property
     def text_under_button(self) -> Locator:
         return self.page.locator("css=#num-of-files")

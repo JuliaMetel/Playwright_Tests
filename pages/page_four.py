@@ -18,6 +18,7 @@ class PageFour:
             .locator("css=.btn")
         )
 
+    @property
     def text_by_button(self) -> Locator:
         return (
             self.page.frame_locator("css=#frame1")

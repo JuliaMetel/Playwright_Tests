@@ -5,12 +5,12 @@ import requests
 from PIL.ImageFile import ImageFile
 from playwright.sync_api import expect, Page, Route, Request
 from utils import wait_page_stable, is_elements_screenshots_equal
-from page_one import PageOne
-from page_two import PageTwo
-from page_three import PageThree
-from page_four import PageFour
-from page_five import PageFive
-from page_six import PageSix
+from pages.page_one import PageOne
+from pages.page_two import PageTwo
+from pages.page_three import PageThree
+from pages.page_four import PageFour
+from pages.page_five import PageFive
+from pages.page_six import PageSix
 
 
 class TestClass:
@@ -147,16 +147,16 @@ class TestClassQAPlayground:
     def test_button_in_iframe(self, page: Page) -> None:
         page_four = PageFour(page)
         page_four.button.click()
-        expect(page_four.text_by_button()).to_have_text("Button Clicked")
+        expect(page_four.text_by_button).to_have_text("Button Clicked")
 
     def test_upload_file(self, page: Page) -> None:
         page_five = PageFive(page)
-        expect(page_five.text_under_button()).to_have_text("No File Selected")
+        expect(page_five.text_under_button).to_have_text("No File Selected")
         with page.expect_file_chooser() as fc_info:
             page_five.button_select_image_file.click()
         file_chooser = fc_info.value
         file_chooser.set_files("./pictures/test_pic.jpg")
-        expect(page_five.text_under_button()).to_have_text("1 File Selected")
+        expect(page_five.text_under_button).to_have_text("1 File Selected")
 
     def test_alert(self, page: Page) -> None:
         PageSix(page)
@@ -170,3 +170,10 @@ class TestClassQAPlayground:
         page.on("dialog", handle_dialog)
         page.evaluate("alert('Test alert')")
         assert text_by_alert == "Test alert", "Texts are different"
+
+    def test_pop_up(self, page: Page) -> None:
+        page_six = PageSix(page)
+        with page_six.page.expect_popup() as popup_info:
+            page_six.button_open.click()
+        popup = popup_info.value
+        popup.get_by_role("button").click()

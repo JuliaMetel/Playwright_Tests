@@ -1,5 +1,5 @@
 from utils import wait_page_stable
-from playwright.sync_api import Page
+from playwright.sync_api import Page, Locator
 
 
 class PageSix:
@@ -9,3 +9,7 @@ class PageSix:
         self.page = page
         page.goto(self.link, timeout=0)
         wait_page_stable(page)
+
+    @property
+    def button_open(self) -> Locator:
+        return self.page.locator("css=.btn")
